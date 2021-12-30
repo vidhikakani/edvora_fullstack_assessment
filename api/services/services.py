@@ -7,7 +7,7 @@ from jwt import encode, decode
 
 from database import database
 from models import models
-from schemas import user_schema
+from schemas import user_schema, favorite_schema
 
 JWT_SECRET = "edvorafullstackassessmentsecretjwtkey"
 
@@ -76,3 +76,15 @@ async def get_current_user(db: Session = Depends(get_database), token: str = Dep
 
     return user_schema.User.from_orm(user)
 
+async def add_favorite_pokemon(user: user_schema.User, db: Session, favorite: favorite_schema.FavoriteCreate):
+    favorite = models.Favorites(**favorite.dict(), owner_id=user.id)
+    db.add(favorite)
+    db.commit()
+    db.refresh(favorite)
+    return favorite_schema.Favorite.from_orm(favorite)
+
+
+async def get_user_favorite_pokemons(user: user_schema.User, db: Session):
+    favorites = db.query(models.Favorites).filter_by(owner_id=user.id)
+
+    return list(map(favorite_schema.Favorite.from_orm, favorites))
