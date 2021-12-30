@@ -1,4 +1,5 @@
-from fastapi import HTTPException
+from fastapi import HTTPException, Depends
+from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.orm import Session
 import email_validator
 import passlib.hash as hash
@@ -9,6 +10,8 @@ from models import models
 from schemas import user_schema
 
 JWT_SECRET = "edvorafullstackassessmentsecretjwtkey"
+
+oauth2Schema = OAuth2PasswordBearer("/api/users/login")
 
 def create_database():
     return database.Base.metadata.create_all(bind=database.engine)
@@ -51,3 +54,25 @@ async def create_token(user: models.User):
 
     token = encode(user_dict, JWT_SECRET)
     return dict(access_token=token, token_type="bearer")
+
+async def authenticate_user(email: str, password: str, db: Session):
+    user = await get_user_by_email(email=email, db=db)
+
+    if not user:
+        return False
+
+    if not user.verify_password(password=password):
+        return False
+
+    return user
+
+
+async def get_current_user(db: Session = Depends(get_database), token: str = Depends(oauth2Schema)):
+    try:
+        payload = decode(token, JWT_SECRET, algorithms=['HS256'])
+        user = db.query(models.User).get(payload["id"])
+    except:
+        raise HTTPException(status_code=401, detail="Invalid email or password")
+
+    return user_schema.User.from_orm(user)
+

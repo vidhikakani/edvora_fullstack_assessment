@@ -6,3 +6,4 @@ uvicorn
 SQLAlchemy
 sqlalchemy_utils
 psycopg2
+python-multipart
