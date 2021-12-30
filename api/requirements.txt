@@ -3,3 +3,4 @@ passlib[bcrypt]
 email-validator
 pyjwt
 uvicorn
+SQLAlchemy
