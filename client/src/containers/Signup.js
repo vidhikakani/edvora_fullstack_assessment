@@ -62,7 +62,7 @@ const Signup = () => {
                         <div className="text-center mt-4">
                             <Button type="submit">Sign up</Button>
                         </div>
-                        <p className="forgot-password text-right">
+                        <p className="forgot-password text-right mt-2" style={{ display: "flex", justifyContent: "flex-end" }}>
                             Already have an account? <a href="/signin">Signin</a>
                         </p>
                     </form>

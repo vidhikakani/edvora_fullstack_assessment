@@ -26,6 +26,7 @@ export const signup = async (userData) => {
     const SIGNUP_URL = `${BASE_API_URL}/users/signup`
     try {
         const { data: { access_token, token_type } } = await axios.post(SIGNUP_URL, userData)
+        console.log(access_token)
         localStorage.setItem("token", access_token)
         const { user } = await getUser(access_token, token_type)
         return { key: "success", user }
@@ -38,7 +39,10 @@ export const signup = async (userData) => {
 
 export const getUser = async (access_token, token_type) => {
     const ME_URL = `${BASE_API_URL}/users/me`
-    const { data } = await API.get(ME_URL)
+    const headers = {
+        authorization: `${token_type} ${access_token}`
+    }
+    const { data } = await axios.get(ME_URL, { headers })
     return { user: data }
 }
 
