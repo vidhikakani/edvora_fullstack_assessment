@@ -35,3 +35,12 @@ We would also like you to not use tools such as Firebase/Hasura to simplify the 
 5. Use secure api to store user's favorite pokemons on database
 6. Use secure api to delete user's favorite pokemon
 7. Ability for user to logout
+
+# Screenshots
+![alt text](C:\Users\vidhi\OneDrive\Pictures\Screenshots\1.png)
+![alt text](C:\Users\vidhi\OneDrive\Pictures\Screenshots\2.png)
+![alt text](C:\Users\vidhi\OneDrive\Pictures\Screenshots\3.png)
+![alt text](C:\Users\vidhi\OneDrive\Pictures\Screenshots\4.png)
+![alt text](C:\Users\vidhi\OneDrive\Pictures\Screenshots\5.png)
+![alt text](C:\Users\vidhi\OneDrive\Pictures\Screenshots\6.png)
+![alt text](C:\Users\vidhi\OneDrive\Pictures\Screenshots\7.png)
