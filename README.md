@@ -8,3 +8,28 @@ Fullstack application based on the Pokemon API (pokeapi.co) that has the followi
 
 We require you to create the assessment using FastAPI and React.js. 
 We would also like you to not use tools such as Firebase/Hasura to simplify the development.
+
+# Download and install required tools/software
+1. PostgreSQL
+2. Node.js
+3. Python/Anaconda
+
+# Steps to run:
+1. git clone <project_url> && cd edvora_fullstack_assessment
+2. cd api
+3. pip install -r requirements.txt
+4. Open command prompt in /api directory and run the following commands
+    a. python
+    b. from services import services
+    c. services.create_database()
+    d. exit()
+5. python -m uvicorn main:app --reload
+
+# Features implemented
+1. Ability for a user to Login/Signup
+2. Ability to view logged-in user
+3. Display list of pokemons
+4. Load more pokemons on demand
+5. Use secure api to store user's favorite pokemons on database
+6. Use secure api to delete user's favorite pokemon
+7. Ability for user to logout
