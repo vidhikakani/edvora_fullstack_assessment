@@ -24,6 +24,9 @@ We would also like you to not use tools such as Firebase/Hasura to simplify the 
     c. services.create_database()
     d. exit()
 5. python -m uvicorn main:app --reload
+6. cd..
+7. cd client
+8. npm start
 
 # Features implemented
 1. Ability for a user to Login/Signup
