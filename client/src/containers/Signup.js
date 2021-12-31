@@ -5,21 +5,24 @@ import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
 import Button from "react-bootstrap/Button"
 import Alert from "react-bootstrap/Alert";
-import { signin } from '../services/user';
+import { signup } from "../services/user"
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-const Login = () => {
+const Signup = () => {
     const navigate = useNavigate()
     const [response, setResponse] = useState(null)
 
-    const signinHandler = async (event) => {
+    const signupHandler = async (event) => {
         event.preventDefault()
         const data = new FormData(event.currentTarget)
         const userObj = {
-            "username": data.get("email"),
+            "first_name": data.get("first_name"),
+            "last_name": data.get("last_name"),
+            "email": data.get("email"),
             "password": data.get("password")
         }
 
-        const res = await signin(userObj)
+        const res = await signup(userObj)
         if (res.key === "success") {
             navigate("/")
         }
@@ -30,8 +33,18 @@ const Login = () => {
         <Container>
             <Row>
                 <Col md="4" className='mx-auto mt-4'>
-                    <form onSubmit={signinHandler}>
-                        <p className="h4 text-center mb-4">Sign in</p>
+                    <form onSubmit={signupHandler}>
+                        <p className="h4 text-center mb-4">Sign up</p>
+                        <label htmlFor="first_name" className="grey-text">
+                            First Name
+                        </label>
+                        <input type="text" id="first_name" name="first_name" className="form-control" />
+                        <br />
+                        <label htmlFor="last_name" className="grey-text">
+                            Last Name
+                        </label>
+                        <input type="text" id="last_name" name="last_name" className="form-control" />
+                        <br />
                         <label htmlFor="email" className="grey-text">
                             Email
                         </label>
@@ -41,11 +54,12 @@ const Login = () => {
                             Password
                         </label>
                         <input type="password" id="password" name="password" className="form-control" />
+                        <br />
                         <div className="text-center mt-4">
-                            <Button type="submit">Sign in</Button>
+                            <Button type="submit">Sign up</Button>
                         </div>
                         <p className="forgot-password text-right">
-                            Don't have an account? <a href="/signup">Signup</a>
+                            Already have an account? <a href="/signin">Signin</a>
                         </p>
                     </form>
                 </Col>
@@ -56,8 +70,9 @@ const Login = () => {
                     )}
                 </>
             </Row>
+
         </Container>
     );
 }
 
-export default Login
+export default Signup

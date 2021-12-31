@@ -8,7 +8,7 @@ from services import services
 router = APIRouter()
 
 @router.post("/signup")
-async def create_user(user: user_schema.UserCreate,
+async def signup(user: user_schema.UserCreate,
                       db: Session = Depends(services.get_database)):
     db_user = await services.get_user_by_email(email=user.email, db=db)
 
@@ -21,13 +21,14 @@ async def create_user(user: user_schema.UserCreate,
 
 
 @router.post("/login")
-async def generate_token(form_data: OAuth2PasswordRequestForm = Depends(),
-                         db: Session = Depends(services.get_database)):
+async def login(form_data: OAuth2PasswordRequestForm = Depends(),
+                        db: Session = Depends(services.get_database)):
+    # data = form_data.parse()
+    # print(data.username)
     user = await services.authenticate_user(email=form_data.username, password=form_data.password, db=db)
 
     if not user:
-        raise HTTPException(status_code=401,
-                                    detail="Invalid credentials")
+        raise HTTPException(status_code=401, detail="Invalid credentials")
 
     return await services.create_token(user)
 

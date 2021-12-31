@@ -14,7 +14,7 @@ const NavBar = () => {
                         <Nav.Link href="/favorites">My Favorites</Nav.Link>
                     </Nav>
                     <Nav>
-                        <Nav.Link href="/login">Login</Nav.Link>
+                        <Nav.Link href="/signin">Login</Nav.Link>
                     </Nav>
                 </Container>
             </Navbar>
