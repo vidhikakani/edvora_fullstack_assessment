@@ -44,3 +44,32 @@ export const getUser = async (access_token, token_type) => {
     const { data } = await axios.get(ME_URL, { headers: headers_new })
     return { user: data }
 }
+
+export const addFavoritePokemon = async (favoritePokemon) => {
+    const pokemon_url = `${BASE_API_URL}/favorites/add-favorite-pokemon`
+    const access_token = localStorage.getItem("token")
+    const headers = {
+        authorization: `bearer ${access_token}`
+    }
+    try {
+        const response = await axios.post(pokemon_url, favoritePokemon, { headers: headers })
+        const { favorites } = await fetchMyFavoritePokemons()
+        return favorites
+    } catch (error) {
+        console.log(error.response.data)
+    }
+}
+
+export const fetchMyFavoritePokemons = async (access_token) => {
+    const pokemon_url = `${BASE_API_URL}/favorites/get-favorite-pokemons`
+    const token = access_token ? access_token : localStorage.getItem("token")
+    const headers = {
+        authorization: `bearer ${token}`
+    }
+    try {
+        const { data } = await axios.get(pokemon_url, { headers: headers })
+        return { favorites: data }
+    } catch (error) {
+        console.log(error.response.data)
+    }
+}

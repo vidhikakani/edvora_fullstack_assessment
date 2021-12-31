@@ -4,6 +4,8 @@ import Col from "react-bootstrap/Col"
 import Button from "react-bootstrap/Button"
 import PokemonCard from '../components/PokemonCard'
 import { fetchAllPokemons } from '../services/pokemon'
+import { fetchMyFavoritePokemons } from "../services/user"
+import { addFavoritePokemon } from '../services/user'
 import UserContext from '../store/user-context';
 
 const Home = () => {
@@ -23,11 +25,28 @@ const Home = () => {
         return () => setPokemonData([])
     }, [])
 
+    useEffect(() => {
+        (async () => {
+            const access_token = localStorage.getItem("token")
+            if (access_token) {
+                const { favorites } = await fetchMyFavoritePokemons(access_token)
+                userCtx.upsertFavoritePokemons(favorites)
+            }
+        })()
+
+        return () => { }
+    }, [pokemonData])
+
     const loadMoreHandler = async () => {
         const { nextUrl, pokemon_data } = await fetchAllPokemons(next)
         const pokemons = pokemonData.concat(pokemon_data)
         setPokemonData(pokemons)
         setNext(nextUrl)
+    }
+
+    const addToFavoriteHandler = async (pokemon_id) => {
+        const favoritePokemons = await addFavoritePokemon({ pokemon_id })
+        userCtx.upsertFavoritePokemons(favoritePokemons)
     }
 
     return (
@@ -36,7 +55,11 @@ const Home = () => {
                 {
                     pokemonData.map(pokemon => (
                         <Col key={pokemon.id}>
-                            <PokemonCard pokemon={pokemon} />
+                            <PokemonCard pokemon={pokemon}
+                                addToFavorite={addToFavoriteHandler}
+                                disableButton={!userCtx.user}
+                                isFavoritePokemon={userCtx.isFavoritePokemon(pokemon.id)}
+                            />
                         </Col>
                     ))
                 }

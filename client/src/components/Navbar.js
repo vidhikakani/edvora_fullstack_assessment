@@ -12,10 +12,8 @@ const NavBar = () => {
     const logoutHandler = () => {
         localStorage.removeItem("token")
         userCtx.removeUser()
-        navigate("/")
+        navigate("/", { replace: true })
     }
-
-    console.log(userCtx)
 
     return (
         <>

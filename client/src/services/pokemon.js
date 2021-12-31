@@ -12,3 +12,14 @@ export const fetchAllPokemons = async (url) => {
     }
     return { nextUrl: next, pokemon_data }
 }
+
+export const fetchPokemonsById = async (pokemonIdList) => {
+    const pokemons = []
+    for (let i = 0; i < pokemonIdList.length; i++) {
+        const id = pokemonIdList[i]
+        const pokemon_url = `${POKEMON_URL}/${id}`
+        const { data } = await axios.get(pokemon_url)
+        pokemons.push(data)
+    }
+    return pokemons
+}

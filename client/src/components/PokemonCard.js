@@ -3,12 +3,16 @@ import Card from "react-bootstrap/Card"
 import ListGroup from "react-bootstrap/ListGroup"
 import ListGroupItem from "react-bootstrap/ListGroupItem"
 import Button from "react-bootstrap/Button"
-import Row from "react-bootstrap/Row"
-import Col from "react-bootstrap/Col"
 
 const PokemonCard = (props) => {
-    const { pokemon: { name, height, weight, types, sprites, order } } = props
+    const {
+        pokemon: { id, name, height, weight, sprites, order },
+        addToFavorite,
+        disableButton,
+        isFavoritePokemon,
+    } = props
     const pokemon_name = `${name[0].toUpperCase()}${name.substring(1)}`
+
     return (
         <Card>
             <Card.Header>{pokemon_name}</Card.Header>
@@ -24,7 +28,20 @@ const PokemonCard = (props) => {
             </ListGroup>
             <Card.Body>
                 <div xs={1} style={{ display: 'flex', justifyContent: 'center' }}>
-                    <Button variant="primary">Add to Favorites</Button>
+                    {isFavoritePokemon && <Button
+                        onClick={() => { }}
+                        variant="secondary"
+                        disabled={true}
+                    >
+                        Remove from Favorites
+                    </Button>}
+                    {!isFavoritePokemon && <Button
+                        onClick={() => addToFavorite(id)}
+                        variant="primary"
+                        disabled={disableButton}
+                    >
+                        Add to Favorites
+                    </Button>}
                 </div>
 
             </Card.Body>
