@@ -1,6 +1,6 @@
 import axios from "axios"
 import qs from "qs"
-import { BASE_API_URL } from "."
+import API, { BASE_API_URL } from "."
 
 export const signin = async (userData) => {
     const SIGNIN_URL = `${BASE_API_URL}/users/login`
@@ -38,21 +38,14 @@ export const signup = async (userData) => {
 
 export const getUser = async (access_token, token_type) => {
     const ME_URL = `${BASE_API_URL}/users/me`
-    const headers_new = {
-        authorization: `${token_type} ${access_token}`
-    }
-    const { data } = await axios.get(ME_URL, { headers: headers_new })
+    const { data } = await API.get(ME_URL)
     return { user: data }
 }
 
 export const addFavoritePokemon = async (favoritePokemon) => {
     const pokemon_url = `${BASE_API_URL}/favorites/add-favorite-pokemon`
-    const access_token = localStorage.getItem("token")
-    const headers = {
-        authorization: `bearer ${access_token}`
-    }
     try {
-        const response = await axios.post(pokemon_url, favoritePokemon, { headers: headers })
+        const response = await API.post(pokemon_url, favoritePokemon)
         const { favorites } = await fetchMyFavoritePokemons()
         return favorites
     } catch (error) {
@@ -60,14 +53,10 @@ export const addFavoritePokemon = async (favoritePokemon) => {
     }
 }
 
-export const fetchMyFavoritePokemons = async (access_token) => {
+export const fetchMyFavoritePokemons = async () => {
     const pokemon_url = `${BASE_API_URL}/favorites/get-favorite-pokemons`
-    const token = access_token ? access_token : localStorage.getItem("token")
-    const headers = {
-        authorization: `bearer ${token}`
-    }
     try {
-        const { data } = await axios.get(pokemon_url, { headers: headers })
+        const { data } = await API.get(pokemon_url)
         return { favorites: data }
     } catch (error) {
         console.log(error.response.data)
@@ -76,12 +65,8 @@ export const fetchMyFavoritePokemons = async (access_token) => {
 
 export const removeFavoritePokemon = async (favoritePokemon) => {
     const pokemon_url = `${BASE_API_URL}/favorites/remove-favorite-pokemon`
-    const access_token = localStorage.getItem("token")
-    const headers = {
-        authorization: `bearer ${access_token}`
-    }
     try {
-        const { data } = await axios.post(pokemon_url, favoritePokemon, { headers: headers })
+        const { data } = await API.post(pokemon_url, favoritePokemon)
         return data
     } catch (error) {
         console.log(error.response.data)
