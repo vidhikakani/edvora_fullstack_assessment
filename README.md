@@ -37,10 +37,10 @@ We would also like you to not use tools such as Firebase/Hasura to simplify the 
 7. Ability for user to logout
 
 # Screenshots
-![alt text](C:\Users\vidhi\OneDrive\Pictures\Screenshots\1.png)
-![alt text](C:\Users\vidhi\OneDrive\Pictures\Screenshots\2.png)
-![alt text](C:\Users\vidhi\OneDrive\Pictures\Screenshots\3.png)
-![alt text](C:\Users\vidhi\OneDrive\Pictures\Screenshots\4.png)
-![alt text](C:\Users\vidhi\OneDrive\Pictures\Screenshots\5.png)
-![alt text](C:\Users\vidhi\OneDrive\Pictures\Screenshots\6.png)
-![alt text](C:\Users\vidhi\OneDrive\Pictures\Screenshots\7.png)
+![Screenshot](C:\Users\vidhi\OneDrive\Pictures\Screenshots\1.png)
+![Screenshot](C:\Users\vidhi\OneDrive\Pictures\Screenshots\2.png)
+![Screenshot](C:\Users\vidhi\OneDrive\Pictures\Screenshots\3.png)
+![Screenshot](C:\Users\vidhi\OneDrive\Pictures\Screenshots\4.png)
+![Screenshot](C:\Users\vidhi\OneDrive\Pictures\Screenshots\5.png)
+![Screenshot](C:\Users\vidhi\OneDrive\Pictures\Screenshots\6.png)
+![Screenshot](C:\Users\vidhi\OneDrive\Pictures\Screenshots\7.png)
