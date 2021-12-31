@@ -8,6 +8,7 @@ const PokemonCard = (props) => {
     const {
         pokemon: { id, name, height, weight, sprites, order },
         addToFavorite,
+        removeFromFavorite,
         disableButton,
         isFavoritePokemon,
     } = props
@@ -29,9 +30,9 @@ const PokemonCard = (props) => {
             <Card.Body>
                 <div xs={1} style={{ display: 'flex', justifyContent: 'center' }}>
                     {isFavoritePokemon && <Button
-                        onClick={() => { }}
+                        onClick={() => removeFromFavorite(id)}
+                        disabled={disableButton}
                         variant="secondary"
-                        disabled={true}
                     >
                         Remove from Favorites
                     </Button>}

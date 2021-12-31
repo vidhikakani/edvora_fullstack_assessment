@@ -20,7 +20,7 @@ async def get_user_favorite_pokemons(user: user_schema.User = Depends(services.g
                                 db: Session = Depends(services.get_database)):
     return await services.get_user_favorite_pokemons(user=user, db=db)
 
-@router.post("/remove-favorite-pokemon")
+@router.post("/remove-favorite-pokemon", response_model=List[favorite_schema.Favorite])
 async def get_user_favorite_pokemons(favorite: favorite_schema.FavoriteRemove,
                                 user: user_schema.User = Depends(services.get_current_user),
                                 db: Session = Depends(services.get_database)):

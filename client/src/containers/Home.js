@@ -4,7 +4,7 @@ import Col from "react-bootstrap/Col"
 import Button from "react-bootstrap/Button"
 import PokemonCard from '../components/PokemonCard'
 import { fetchAllPokemons } from '../services/pokemon'
-import { fetchMyFavoritePokemons } from "../services/user"
+import { fetchMyFavoritePokemons, removeFavoritePokemon } from "../services/user"
 import { addFavoritePokemon } from '../services/user'
 import UserContext from '../store/user-context';
 
@@ -49,6 +49,11 @@ const Home = () => {
         userCtx.upsertFavoritePokemons(favoritePokemons)
     }
 
+    const removeFromFavoriteHandler = async (pokemon_id) => {
+        const favoritePokemons = await removeFavoritePokemon({ pokemon_id })
+        userCtx.upsertFavoritePokemons(favoritePokemons)
+    }
+
     return (
         <div>
             <Row xs={1} md={5} className="g-4 m-2">
@@ -59,6 +64,7 @@ const Home = () => {
                                 addToFavorite={addToFavoriteHandler}
                                 disableButton={!userCtx.user}
                                 isFavoritePokemon={userCtx.isFavoritePokemon(pokemon.id)}
+                                removeFromFavorite={removeFromFavoriteHandler}
                             />
                         </Col>
                     ))

@@ -103,5 +103,7 @@ async def remove_favorite_pokemon(user: user_schema.User, db: Session, favorite:
 
     db.delete(data_to_delete)
     db.commit()
-    
-    return {"ok": True}
+
+    favorites = db.query(models.Favorites).filter_by(owner_id=user.id)
+
+    return list(map(favorite_schema.Favorite.from_orm, favorites))

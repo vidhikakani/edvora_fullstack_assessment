@@ -26,7 +26,6 @@ export function UserContextProvider(props) {
     }
 
     function isFavoritePokemonHandler(pokemonId) {
-        console.log(favorites)
         return favorites.filter(pokemon => pokemon.pokemon_id === pokemonId).length === 1
     }
 

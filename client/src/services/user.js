@@ -73,3 +73,17 @@ export const fetchMyFavoritePokemons = async (access_token) => {
         console.log(error.response.data)
     }
 }
+
+export const removeFavoritePokemon = async (favoritePokemon) => {
+    const pokemon_url = `${BASE_API_URL}/favorites/remove-favorite-pokemon`
+    const access_token = localStorage.getItem("token")
+    const headers = {
+        authorization: `bearer ${access_token}`
+    }
+    try {
+        const { data } = await axios.post(pokemon_url, favoritePokemon, { headers: headers })
+        return data
+    } catch (error) {
+        console.log(error.response.data)
+    }
+}
