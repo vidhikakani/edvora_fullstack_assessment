@@ -1,6 +1,6 @@
 import axios from "axios"
 import qs from "qs"
-import API, { BASE_API_URL } from "."
+import { API, BASE_API_URL } from "."
 
 export const signin = async (userData) => {
     const SIGNIN_URL = `${BASE_API_URL}/users/login`
@@ -49,7 +49,7 @@ export const getUser = async (access_token, token_type) => {
 export const addFavoritePokemon = async (favoritePokemon) => {
     const pokemon_url = `${BASE_API_URL}/favorites/add-favorite-pokemon`
     try {
-        const response = await API.post(pokemon_url, favoritePokemon)
+        const response = await API().post(pokemon_url, favoritePokemon)
         const { favorites } = await fetchMyFavoritePokemons()
         return favorites
     } catch (error) {
@@ -60,7 +60,7 @@ export const addFavoritePokemon = async (favoritePokemon) => {
 export const fetchMyFavoritePokemons = async () => {
     const pokemon_url = `${BASE_API_URL}/favorites/get-favorite-pokemons`
     try {
-        const { data } = await API.get(pokemon_url)
+        const { data } = await API().get(pokemon_url)
         return { favorites: data }
     } catch (error) {
         console.log(error.response.data)
@@ -70,7 +70,7 @@ export const fetchMyFavoritePokemons = async () => {
 export const removeFavoritePokemon = async (favoritePokemon) => {
     const pokemon_url = `${BASE_API_URL}/favorites/remove-favorite-pokemon`
     try {
-        const { data } = await API.post(pokemon_url, favoritePokemon)
+        const { data } = await API().post(pokemon_url, favoritePokemon)
         return data
     } catch (error) {
         console.log(error.response.data)
