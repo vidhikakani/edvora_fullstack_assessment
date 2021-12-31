@@ -8,6 +8,9 @@ class FavoriteBase(pydantic.BaseModel):
 class FavoriteCreate(FavoriteBase):
     pass
 
+class FavoriteRemove(FavoriteBase):
+    pass
+
 
 class Favorite(FavoriteBase):
     id: int

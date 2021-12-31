@@ -96,3 +96,12 @@ async def get_user_favorite_pokemons(user: user_schema.User, db: Session):
     favorites = db.query(models.Favorites).filter_by(owner_id=user.id)
 
     return list(map(favorite_schema.Favorite.from_orm, favorites))
+
+async def remove_favorite_pokemon(user: user_schema.User, db: Session, favorite: favorite_schema.FavoriteRemove):
+    poke = models.Favorites(**favorite.dict(), owner_id=user.id)
+    data_to_delete = db.query(models.Favorites).filter_by(owner_id=user.id, pokemon_id=poke.pokemon_id).first()
+
+    db.delete(data_to_delete)
+    db.commit()
+    
+    return {"ok": True}
