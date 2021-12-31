@@ -1,14 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom';
-import Container from 'react-bootstrap/Container';
+import Container from 'react-bootstrap/Container'
 import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
 import Button from "react-bootstrap/Button"
-import Alert from "react-bootstrap/Alert";
-import { signin } from '../services/user';
+import Alert from "react-bootstrap/Alert"
+import { signin } from '../services/user'
+import UserContext from '../store/user-context'
 
 const Login = () => {
     const navigate = useNavigate()
+    const userCtx = useContext(UserContext)
     const [response, setResponse] = useState(null)
 
     const signinHandler = async (event) => {
@@ -21,7 +23,10 @@ const Login = () => {
 
         const res = await signin(userObj)
         if (res.key === "success") {
+            userCtx.addUser(res.user)
             navigate("/")
+        } else {
+            userCtx.removeUser()
         }
         setResponse(res)
     }

@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
 import Button from "react-bootstrap/Button"
 import PokemonCard from '../components/PokemonCard'
 import { fetchAllPokemons } from '../services/pokemon'
+import UserContext from '../store/user-context';
 
 const Home = () => {
     const [pokemonData, setPokemonData] = useState([])
     const [next, setNext] = useState(null)
+    const userCtx = useContext(UserContext)
+
     useEffect(() => {
         async function fetchAll() {
             const { nextUrl, pokemon_data } = await fetchAllPokemons(next)

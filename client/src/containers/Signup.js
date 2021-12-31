@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Row from "react-bootstrap/Row"
@@ -6,10 +6,11 @@ import Col from "react-bootstrap/Col"
 import Button from "react-bootstrap/Button"
 import Alert from "react-bootstrap/Alert";
 import { signup } from "../services/user"
-import 'bootstrap/dist/css/bootstrap.min.css';
+import UserContext from '../store/user-context'
 
 const Signup = () => {
     const navigate = useNavigate()
+    const userCtx = useContext(UserContext)
     const [response, setResponse] = useState(null)
 
     const signupHandler = async (event) => {
@@ -24,7 +25,10 @@ const Signup = () => {
 
         const res = await signup(userObj)
         if (res.key === "success") {
+            userCtx.addUser(res.user)
             navigate("/")
+        } else {
+            userCtx.removeUser()
         }
         setResponse(res)
     }

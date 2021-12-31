@@ -23,8 +23,7 @@ const PokemonCard = (props) => {
                 </ListGroupItem>
             </ListGroup>
             <Card.Body>
-                <div xs={1} style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <Button variant="primary">View</Button>
+                <div xs={1} style={{ display: 'flex', justifyContent: 'center' }}>
                     <Button variant="primary">Add to Favorites</Button>
                 </div>
 

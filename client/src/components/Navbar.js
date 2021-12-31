@@ -1,9 +1,22 @@
-import React from "react";
+import React, { useContext } from "react"
+import { useNavigate } from "react-router-dom"
 import Navbar from "react-bootstrap/Navbar"
 import Nav from "react-bootstrap/Nav"
 import Container from "react-bootstrap/Container"
+import UserContext from '../store/user-context'
 
 const NavBar = () => {
+    const userCtx = useContext(UserContext)
+    const navigate = useNavigate()
+
+    const logoutHandler = () => {
+        localStorage.removeItem("token")
+        userCtx.removeUser()
+        navigate("/")
+    }
+
+    console.log(userCtx)
+
     return (
         <>
             <Navbar bg="primary" variant="dark">
@@ -13,9 +26,15 @@ const NavBar = () => {
                         <Nav.Link href="/">Home</Nav.Link>
                         <Nav.Link href="/favorites">My Favorites</Nav.Link>
                     </Nav>
-                    <Nav>
+                    {!userCtx.user && <Nav>
                         <Nav.Link href="/signin">Login</Nav.Link>
-                    </Nav>
+                    </Nav>}
+
+                    {userCtx.user && <Nav.Item onClick={logoutHandler} style={{ color: 'white' }}>
+                        <Nav.Link style={{ color: 'white' }}>
+                            Signed in as: {userCtx.user.last_name}, {userCtx.user.first_name}
+                        </Nav.Link>
+                    </Nav.Item>}
                 </Container>
             </Navbar>
         </>
