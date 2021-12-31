@@ -4,12 +4,15 @@ from sqlalchemy.orm import Session
 import email_validator
 import passlib.hash as hash
 from jwt import encode, decode
+from datetime import datetime, timedelta
 
 from database import database
 from models import models
 from schemas import user_schema, favorite_schema
 
 JWT_SECRET = "edvorafullstackassessmentsecretjwtkey"
+ALGORITHM = "HS256"
+ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
 oauth2Schema = OAuth2PasswordBearer("/api/users/login")
 
@@ -51,8 +54,13 @@ async def create_token(user: models.User):
     user_schema_obj = user_schema.User.from_orm(user)
     user_dict = user_schema_obj.dict()
     del user_dict["created_at"]
+    to_encode = user_dict.copy()
 
-    token = encode(user_dict, JWT_SECRET)
+    expire = datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    
+    to_encode.update({"exp": expire})
+    
+    token = encode(user_dict, JWT_SECRET, ALGORITHM)
     return dict(access_token=token, token_type="bearer")
 
 async def authenticate_user(email: str, password: str, db: Session):
@@ -69,7 +77,7 @@ async def authenticate_user(email: str, password: str, db: Session):
 
 async def get_current_user(db: Session = Depends(get_database), token: str = Depends(oauth2Schema)):
     try:
-        payload = decode(token, JWT_SECRET, algorithms=['HS256'])
+        payload = decode(token, JWT_SECRET, algorithms=[ALGORITHM])
         user = db.query(models.User).get(payload["id"])
     except:
         raise HTTPException(status_code=401, detail="Invalid email or password")
