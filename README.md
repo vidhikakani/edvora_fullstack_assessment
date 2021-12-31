@@ -37,10 +37,10 @@ We would also like you to not use tools such as Firebase/Hasura to simplify the 
 7. Ability for user to logout
 
 # Screenshots
-![Screenshot](C:\Users\vidhi\OneDrive\Pictures\Screenshots\1.png)
-![Screenshot](C:\Users\vidhi\OneDrive\Pictures\Screenshots\2.png)
-![Screenshot](C:\Users\vidhi\OneDrive\Pictures\Screenshots\3.png)
-![Screenshot](C:\Users\vidhi\OneDrive\Pictures\Screenshots\4.png)
-![Screenshot](C:\Users\vidhi\OneDrive\Pictures\Screenshots\5.png)
-![Screenshot](C:\Users\vidhi\OneDrive\Pictures\Screenshots\6.png)
-![Screenshot](C:\Users\vidhi\OneDrive\Pictures\Screenshots\7.png)
+![1 ](https://user-images.githubusercontent.com/96503444/147832878-04d3bed7-616b-42cd-89bf-cec4e0473e88.png)
+![2](https://user-images.githubusercontent.com/96503444/147832880-6ad1689e-4e03-47ba-accc-e22361c2a0d6.png)
+![3](https://user-images.githubusercontent.com/96503444/147832881-d8dcabc5-70cd-4d23-b8ba-0cc57f7c3cc6.png)
+![4](https://user-images.githubusercontent.com/96503444/147832882-ed46087d-dbeb-4eb0-926e-52bed9a9aa60.png)
+![5](https://user-images.githubusercontent.com/96503444/147832884-4df9410b-58ad-49c3-a165-14d8d61fe6e1.png)
+![6](https://user-images.githubusercontent.com/96503444/147832885-b7e527d0-2f28-4e9f-a87c-41481decb3f4.png)
+![7](https://user-images.githubusercontent.com/96503444/147832886-d402b0fc-651b-489b-8320-bcc39dc64955.png)
